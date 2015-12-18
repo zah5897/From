@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="app_color">#03AEFF</color>
+    <color name="light_app_color">#77AEFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="old_red">#C74B46</color>
+
+    <color name="transparent">@android:color/transparent</color>
+    <color name="half_transparent">#11000000</color>
+    <color name="line_color">#E4E4E4</color>
+
+    <color name="light_gray_hint">#ffc1c1c1</color>
+    <color name="email_auto_complete_item_pressed_color">#ffb9f4ff</color>
+</resources>

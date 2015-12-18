@@ -1,0 +1,34 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+
+    <style name="User" />
+
+    <style name="User.EditText" parent="@style/User">
+        <item name="android:textSize">16.0dip</item>
+        <item name="android:textColor">#ff41515e</item>
+        <item name="android:textColorHint">@color/light_gray_hint</item>
+        <item name="android:gravity">left</item>
+        <item name="android:background">@drawable/photostrim_tag_user_register_edit_text_bg</item>
+        <item name="android:paddingLeft">5.0dip</item>
+        <item name="android:paddingRight">5.0dip</item>
+        <item name="android:singleLine">@color/light_gray_hint</item>
+    </style>
+
+    <style name="User.EditText.Email" parent="@style/User.EditText">
+        <item name="android:maxLength">255</item>
+        <item name="android:digits">
+            0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-.@
+        </item>
+        <item name="android:inputType">textEmailAddress</item>
+    </style>
+
+    <style name="User.EditText.Password" parent="@style/User.EditText">
+        <item name="android:maxLength">20</item>
+        <item name="android:inputType">textPassword</item>
+    </style>
+</resources>

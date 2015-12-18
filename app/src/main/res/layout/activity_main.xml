@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"></FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_color"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/main_tab_padding"
+        android:paddingTop="@dimen/main_tab_padding"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/mHomeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/main_tab_drawable_padding"
+            android:drawableTop="@mipmap/icon_home_selected"
+            android:gravity="center"
+            android:text="首页"
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_tab_text_size" />
+
+        <TextView
+            android:id="@+id/mRequire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/main_tab_drawable_padding"
+            android:drawableTop="@mipmap/icon_activite_unselected"
+            android:gravity="center"
+            android:text="悬赏"
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_tab_text_size" />
+
+
+        <RelativeLayout
+            android:id="@+id/mMessageLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/mMessageIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawablePadding="@dimen/main_tab_drawable_padding"
+                android:drawableTop="@drawable/message_selector"
+                android:gravity="center"
+                android:text="消息"
+                android:textColor="@color/white"
+                android:textSize="@dimen/main_tab_text_size" />
+
+            <TextView
+                android:id="@+id/msgTip"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_toRightOf="@id/mMessageIcon"
+                android:background="@drawable/oval_red"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/mSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/main_tab_drawable_padding"
+            android:drawableTop="@drawable/setting_selector"
+            android:gravity="center"
+            android:text="我"
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_tab_text_size" />
+
+    </LinearLayout>
+</LinearLayout>

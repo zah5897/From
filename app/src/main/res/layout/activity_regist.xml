@@ -1,0 +1,135 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/app_color">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="45dp"
+            android:layout_height="43dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/view_selector"
+            android:padding="5dp"
+            android:src="@drawable/back_selector" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="用户注册"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/regist"
+            android:layout_width="60dp"
+            android:layout_height="43dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/view_selector"
+            android:gravity="center"
+            android:text="注册"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.haoqi.from.view.EmailAutoCompleteTextView
+                    android:id="@+id/et_email"
+                    style="@style/User.EditText.Email"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-.@"
+                    android:drawableLeft="@mipmap/user_register_icon_email"
+                    android:drawablePadding="12.0dip"
+                    android:dropDownVerticalOffset="0.0dip"
+                    android:focusable="true"
+                    android:gravity="left|center"
+                    android:hint="邮箱"
+                    android:paddingTop="28.0dip"
+                    android:scrollbarThumbVertical="@mipmap/list_bar_bg"
+                    android:textCursorDrawable="@null" />
+
+                <ImageView
+                    android:id="@+id/email_error_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/et_email"
+                    android:layout_alignRight="@id/et_email"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:paddingBottom="7.0dip"
+                    android:paddingRight="10.0dip"
+                    android:src="@mipmap/regist_orange_error_tip"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_password"
+                    style="@style/User.EditText.Password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/user_register_icon_password"
+                    android:drawablePadding="12.0dip"
+                    android:gravity="left|center"
+                    android:hint="密码"
+                    android:paddingTop="25.0dip"
+                    android:textCursorDrawable="@null" />
+
+                <ImageView
+                    android:id="@+id/password_error_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/et_password"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:background="@null"
+                    android:paddingBottom="7.0dip"
+                    android:src="@mipmap/regist_orange_error_tip"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20.0dip"
+            android:layout_marginRight="20.0dip"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/blue_button_bg_selector"
+            android:gravity="center"
+            android:padding="10.0dip"
+            android:text="注册"
+            android:textColor="@color/white"
+            android:textSize="16.0sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

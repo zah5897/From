@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="316.0dip"
+    android:layout_height="wrap_content"
+    android:background="@drawable/email_auto_complete_item_selector"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/item_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="7.0dip"
+        android:paddingLeft="5.0dip"
+        android:paddingTop="7.0dip"
+        android:textColor="#ffb8b8b8"
+        android:textSize="14.0sp" />
+</LinearLayout>

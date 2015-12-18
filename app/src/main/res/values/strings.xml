@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">宅男乐园</string>
+
+    <string name="finish_tip">再按一次退出</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>
