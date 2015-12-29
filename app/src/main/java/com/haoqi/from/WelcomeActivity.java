@@ -20,7 +20,7 @@ public class WelcomeActivity extends Activity {
             @Override
             public void run() {
                 startActivity(new Intent(getBaseContext(), MainActivity.class));
-                finish(); //测试提交
+                finish(); //测试提交    d
             }
         }, 2000);
         ConfigManager.Instance(this);
