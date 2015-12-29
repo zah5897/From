@@ -7,6 +7,8 @@
     <color name="red">#FF0000</color>
     <color name="old_red">#C74B46</color>
 
+    <color name="gloden">#F4B110</color>
+
     <color name="transparent">@android:color/transparent</color>
     <color name="half_transparent">#11000000</color>
     <color name="line_color">#E4E4E4</color>
