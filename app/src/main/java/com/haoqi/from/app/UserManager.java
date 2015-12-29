@@ -53,7 +53,7 @@ public class UserManager {
     public void regist(String name, String password, final CallBackListener listener) {
 
         RequestParams params = new RequestParams();
-        params.put("name", name);
+        params.put("mail", name);
         params.put("password", password);
         HttpUtils.post(Urls.URL_REGIST, params, new DefaultJsonHttpResponseHandler() {
             @Override

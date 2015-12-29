@@ -21,6 +21,7 @@
             android:launchMode="singleTask"></activity>
         <activity android:name=".activity.RegistActivity"></activity>
         <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.EditUserPage"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

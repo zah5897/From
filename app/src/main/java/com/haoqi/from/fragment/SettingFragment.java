@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.ecloud.pulltozoomview.PullToZoomScrollViewEx;
 import com.haoqi.from.R;
+import com.haoqi.from.activity.EditUserPage;
 import com.haoqi.from.activity.LoginActivity;
 import com.haoqi.from.activity.RegistActivity;
 import com.haoqi.from.app.ConfigManager;
@@ -49,9 +50,13 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
             loadViewForCode();
             this.hasInit = true;
         }
-        setValue();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setValue();
+    }
 
     private void setValue() {
         User loginUser = UserManager.getInstance().getUser();
@@ -66,7 +71,7 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
             if (!TextUtils.isEmpty(loginUser.getNick_name())) {
                 user_name.setText(loginUser.getNick_name());
             } else {
-                user_name.setText("您还未登录");
+                user_name.setText("请编辑您的昵称");
             }
             if (!TextUtils.isEmpty(loginUser.getInfo())) {
                 signature.setText(loginUser.getInfo());
@@ -74,9 +79,12 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
                 signature.setText("快去编辑您的签名");
             }
             extra_layout.setVisibility(View.VISIBLE);
+            signature.setVisibility(View.VISIBLE);
         } else {
             scrollView.getHeaderView().findViewById(R.id.ll_action_button).setVisibility(View.VISIBLE);
             extra_layout.setVisibility(View.GONE);
+            signature.setVisibility(View.GONE);
+            user_name.setText("您还没登录");
         }
     }
 
@@ -129,7 +137,11 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
             case R.id.iv_user_head:
             case R.id.tv_user_name:
             case R.id.tv_user_signature:
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                if (UserManager.getInstance().getUser() != null) {
+                    startActivity(new Intent(getActivity(), EditUserPage.class));
+                } else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
             case R.id.right_menu:
                 //setting

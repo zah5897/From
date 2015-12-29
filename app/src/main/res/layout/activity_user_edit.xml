@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title_layout" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="20.0dip">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/user_img_layout"
+                android:layout_width="70.0dip"
+                android:layout_height="70.0dip"
+                android:layout_marginRight="20.0dip"
+                android:layout_marginTop="6.0dip"
+                android:background="@drawable/user_center_edit_info_bg">
+
+                <ImageView
+                    android:id="@+id/user_img"
+                    android:layout_width="65.0dip"
+                    android:layout_height="65.0dip"
+                    android:layout_centerInParent="true"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_camera_night" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/name_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10.0dip"
+                        android:layout_weight="0.0"
+                        android:text="昵称"
+                        android:textColor="#ffb2b2b2"
+                        android:textSize="16.0sp" />
+
+                    <EditText
+                        android:id="@+id/nick_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/name_txt"
+                        android:layout_weight="1.0"
+                        android:dropDownVerticalOffset="0.0dip"
+                        android:focusable="true"
+                        android:hint="输入昵称"
+                        android:maxLength="10"
+                        android:textSize="16.0sp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26.0dip">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10.0dip"
+                        android:layout_weight="0.0"
+                        android:text="性别"
+                        android:textColor="#ffb2b2b2"
+                        android:textSize="16.0sp" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="14.0dip">
+
+                        <CheckBox
+                            android:id="@+id/man_box"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="4.0dip"
+                            android:background="@null"
+                            android:button="@drawable/checkbox_btn_selector"
+                            android:checked="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/man_box"
+                            android:text="男"
+                            android:textColor="#ffb2b2b2"
+                            android:textSize="14.0sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <CheckBox
+                            android:id="@+id/woman_box"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="4.0dip"
+                            android:button="@drawable/checkbox_btn_selector" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/woman_box"
+                            android:text="女"
+                            android:textColor="#ffb2b2b2"
+                            android:textSize="14.0sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42.0dip"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="20.0dip"
+                    android:layout_height="20.0dip"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/user_edit_info_flag" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6.0dip"
+                    android:text="写一句您最喜欢的话:"
+                    android:textColor="#ffb2b2b2"
+                    android:textSize="16.0sp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/most_like_text"
+                style="@style/User.EditText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14.0dip"
+                android:dropDownVerticalOffset="0.0dip"
+                android:focusable="true"
+                android:hint="经典语句能够体现一个人的品味"
+                android:maxLength="20" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_commit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50.0dip"
+            android:background="@drawable/blue_button_bg_selector"
+            android:gravity="center"
+            android:padding="10.0dip"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:textSize="16.0sp" />
+    </LinearLayout>
+</LinearLayout>
