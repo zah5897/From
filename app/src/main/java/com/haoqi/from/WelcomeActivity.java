@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.PersistableBundle;
 
 import com.haoqi.from.app.ConfigManager;
+import com.haoqi.from.app.UserManager;
 
 /**
  * Created by youxifuhuaqi on 2015/12/15.
@@ -23,6 +24,6 @@ public class WelcomeActivity extends Activity {
                 finish(); //测试提交    d
             }
         }, 2000);
-        ConfigManager.Instance(this);
+        UserManager.getInstance();
     }
 }

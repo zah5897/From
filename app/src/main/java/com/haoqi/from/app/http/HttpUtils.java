@@ -1,12 +1,15 @@
 package com.haoqi.from.app.http;
 
+import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.haoqi.from.app.HQApplication;
 import com.haoqi.from.app.listener.CallBackListener;
+import com.haoqi.from.util.ToastUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -15,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,45 +43,45 @@ public class HttpUtils {
         return httpClient;
     }
 
-    public static void post(String url, RequestParams params, CallBackListener callBackListener) {
+    public static void post(String url, RequestParams params, final DefaultJsonHttpResponseHandler callBackListener) {
 
-        getAsyncHttpClient().post(url, params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-            }
-        });
+        if (isNetworkConnected()) {
 
 
-//        if (isNetworkConnected()) {
-//            getAsyncHttpClient().post(url, params,new JsonHttpResponseHandler(){
-//                @Override
-//                public void onSuccess(int statusCode, org.apache.http.Header[] headers, JSONObject response) {
-//                    super.onSuccess(statusCode, headers, response);
-//                }
-//            });
-//        } else {
-//            String responseString = "网络不可用";
-//            asyncHttpResponseHandler.onFailure(404, null, responseString, null);
-//            ToastUtil.show(responseString);
-//        }
+            getAsyncHttpClient().post(url, params, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    int code = response.optInt("code");
+                    if (code != 0) {
+                        String msg = response.optString("msg");
+                        callBackListener.onFailure(code, msg, new RuntimeException(msg));
+                    } else {
+                        callBackListener.onSuccess(statusCode, headers, response);
+                    }
+                }
 
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    if (throwable instanceof SocketTimeoutException) {
+                        String message = "网络请求超时";
+                        ToastUtil.show(message);
+                        callBackListener.onFailure(Error.TIME_OUT, message, new NetworkErrorException());
+                    } else if (throwable instanceof NetworkErrorException) {
+                        String message = "网络异常";
+                        ToastUtil.show(message);
+                        callBackListener.onFailure(Error.NETWORK_ERROR, message, new NetworkErrorException());
+                    } else {
+                        ToastUtil.show("访问服务器失败");
+                        callBackListener.onFailure(Error.SERVER_ERROR, throwable.getMessage(), throwable);
+                    }
+                }
 
+            });
+        } else {
+            String message = "网络不可用";
+            ToastUtil.show(message);
+            callBackListener.onFailure(Error.NETWORK_NOT_AVAILABLE, message, new NetworkErrorException());
+        }
     }
 
 

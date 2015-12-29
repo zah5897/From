@@ -1,13 +1,20 @@
 package com.haoqi.from.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.haoqi.from.R;
+import com.haoqi.from.app.UserManager;
+import com.haoqi.from.app.listener.CallBackListener;
 import com.haoqi.from.base.BaseActivity;
+import com.haoqi.from.util.ProgressDialogUtil;
+import com.haoqi.from.util.ToastUtil;
 import com.haoqi.from.view.EmailAutoCompleteTextView;
 
 import butterknife.ButterKnife;
@@ -52,9 +59,41 @@ public class RegistActivity extends BaseActivity {
         finish();
     }
 
+    private ProgressDialog dialog;
+
     @OnClick(R.id.tv_login)
     public void regist() {
 
+        String email = etEmail.getText().toString();
+        String password = etPassword.getText().toString();
+
+        if (TextUtils.isEmpty(email)) {
+            ToastUtil.show("邮箱不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            ToastUtil.show("密码不能为空");
+            return;
+        }
+
+        dialog = ProgressDialogUtil.show(this, "正在注册...");
+        UserManager.getInstance().regist(email, password, new CallBackListener() {
+            @Override
+            public void onSuccess(int statusCode, Object... obj) {
+                ToastUtil.show("注册成功!");
+                finish();
+                ProgressDialogUtil.dismiss(dialog);
+            }
+
+            @Override
+            public void onFailure(int statusCode, String message) {
+                if (statusCode > 0) {
+                    ToastUtil.show("注册失败," + message);
+                }
+                ProgressDialogUtil.dismiss(dialog);
+
+            }
+        });
     }
 
 }

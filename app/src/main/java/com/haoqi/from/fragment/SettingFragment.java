@@ -3,6 +3,7 @@ package com.haoqi.from.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,9 @@ import com.haoqi.from.R;
 import com.haoqi.from.activity.LoginActivity;
 import com.haoqi.from.activity.RegistActivity;
 import com.haoqi.from.app.ConfigManager;
+import com.haoqi.from.app.UserManager;
 import com.haoqi.from.base.BaseFragment;
+import com.haoqi.from.model.User;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -42,14 +45,42 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loadViewForCode();
-        this.hasInit = true;
+        if (!this.hasInit) {
+            loadViewForCode();
+            this.hasInit = true;
+        }
+        setValue();
+    }
+
+
+    private void setValue() {
+        User loginUser = UserManager.getInstance().getUser();
+
+        TextView signature = ((TextView) scrollView.getHeaderView().findViewById(R.id.tv_user_signature));
+        TextView user_name = ((TextView) scrollView.getHeaderView().findViewById(R.id.tv_user_name));
+        LinearLayout extra_layout = ((LinearLayout) scrollView.getHeaderView().findViewById(R.id.extra_layout));
+
+        if (loginUser != null) {
+            scrollView.getHeaderView().findViewById(R.id.ll_action_button).setVisibility(View.GONE);
+
+            if (!TextUtils.isEmpty(loginUser.getNick_name())) {
+                user_name.setText(loginUser.getNick_name());
+            } else {
+                user_name.setText("您还未登录");
+            }
+            if (!TextUtils.isEmpty(loginUser.getInfo())) {
+                signature.setText(loginUser.getInfo());
+            } else {
+                signature.setText("快去编辑您的签名");
+            }
+            extra_layout.setVisibility(View.VISIBLE);
+        } else {
+            scrollView.getHeaderView().findViewById(R.id.ll_action_button).setVisibility(View.VISIBLE);
+            extra_layout.setVisibility(View.GONE);
+        }
     }
 
     private void loadViewForCode() {
-        if (hasInit) {
-            return;
-        }
         View headView = LayoutInflater.from(getActivity()).inflate(R.layout.profile_head_view, null, false);
         View zoomView = LayoutInflater.from(getActivity()).inflate(R.layout.profile_zoom_view, null, false);
         View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.profile_content_view, null, false);
@@ -68,6 +99,10 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
 
         scrollView.getHeaderView().findViewById(R.id.tv_register).setOnClickListener(this);
         scrollView.getHeaderView().findViewById(R.id.tv_login).setOnClickListener(this);
+
+        scrollView.getHeaderView().findViewById(R.id.iv_user_head).setOnClickListener(this);
+        scrollView.getHeaderView().findViewById(R.id.tv_user_name).setOnClickListener(this);
+        scrollView.getHeaderView().findViewById(R.id.tv_user_signature).setOnClickListener(this);
 
 
         int mScreenHeight = ConfigManager.Instance().screenHeight;
@@ -89,6 +124,11 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
                 startActivity(new Intent(getActivity(), RegistActivity.class));
                 break;
             case R.id.tv_login:
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                break;
+            case R.id.iv_user_head:
+            case R.id.tv_user_name:
+            case R.id.tv_user_signature:
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
             case R.id.right_menu:

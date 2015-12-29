@@ -12,6 +12,7 @@ public class HQApplication extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
+        ConfigManager.Instance(getApp());
     }
 
     public static HQApplication getApp() {
