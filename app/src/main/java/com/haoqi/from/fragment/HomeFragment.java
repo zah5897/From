@@ -21,8 +21,8 @@ import com.haoqi.from.fragment.home.SecretPage;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 
@@ -30,9 +30,9 @@ import butterknife.OnClick;
  * Created by youxifuhuaqi on 2015/12/14.
  */
 public class HomeFragment extends BaseFragment {
-    @InjectView(R.id.tabs)
+    @Bind(R.id.tabs)
     PagerSlidingTabStrip tabs;
-    @InjectView(R.id.viewpager)
+    @Bind(R.id.viewpager)
     ViewPager viewPager;
 
     private ArrayList<BaseFragment> fragmentsList;
@@ -42,7 +42,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -78,6 +78,6 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 }

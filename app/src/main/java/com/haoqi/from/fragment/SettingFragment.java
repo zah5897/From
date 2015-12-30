@@ -22,24 +22,24 @@ import com.haoqi.from.app.UserManager;
 import com.haoqi.from.base.BaseFragment;
 import com.haoqi.from.model.User;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by youxifuhuaqi on 2015/12/14.
  */
 public class SettingFragment extends BaseFragment implements View.OnClickListener {
-    @InjectView(R.id.right_menu)
+    @Bind(R.id.right_menu)
     ImageView rightMenu;
-    @InjectView(R.id.scroll_view)
+    @Bind(R.id.scroll_view)
     PullToZoomScrollViewEx scrollView;
-    @InjectView(R.id.title)
+    @Bind(R.id.title)
     TextView title;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -122,7 +122,7 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 
     @Override

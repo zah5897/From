@@ -17,8 +17,8 @@ import com.haoqi.from.util.ProgressDialogUtil;
 import com.haoqi.from.util.ToastUtil;
 import com.haoqi.from.view.EmailAutoCompleteTextView;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -27,22 +27,22 @@ import butterknife.OnClick;
 public class RegistActivity extends BaseActivity {
 
 
-    @InjectView(R.id.title)
+    @Bind(R.id.title)
     TextView title;
-    @InjectView(R.id.regist)
+    @Bind(R.id.regist)
     TextView regist;
-    @InjectView(R.id.et_email)
+    @Bind(R.id.et_email)
     EmailAutoCompleteTextView etEmail;
-    @InjectView(R.id.et_password)
+    @Bind(R.id.et_password)
     EditText etPassword;
-    @InjectView(R.id.tv_login)
+    @Bind(R.id.tv_login)
     TextView tvLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         title.setText("用户注册");
         regist.setText("登录");
         tvLogin.setText("注册");

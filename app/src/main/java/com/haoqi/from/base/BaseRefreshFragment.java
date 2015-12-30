@@ -12,13 +12,13 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.haoqi.from.R;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 /**
  * Created by youxifuhuaqi on 2015/12/14.
  */
 public class BaseRefreshFragment extends BaseFragment {
-    @InjectView(R.id.mPullToRefresh)
+    @Bind(R.id.mPullToRefresh)
     PullToRefreshListView mPullToRefresh;
     public ListView mList;
 
