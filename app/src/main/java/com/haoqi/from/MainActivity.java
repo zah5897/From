@@ -19,20 +19,20 @@ import com.haoqi.from.fragment.MessageFragment;
 import com.haoqi.from.fragment.RequireFragment;
 import com.haoqi.from.fragment.SettingFragment;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    @InjectView(R.id.mHomeIcon)
+    @Bind(R.id.mHomeIcon)
     TextView mHomeIcon;
-    @InjectView(R.id.mRequire)
+    @Bind(R.id.mRequire)
     TextView mRequire;
-    @InjectView(R.id.mMessageIcon)
+    @Bind(R.id.mMessageIcon)
     TextView mMessageIcon;
-    @InjectView(R.id.mSetting)
+    @Bind(R.id.mSetting)
     TextView mSetting;
 
-    @InjectView(R.id.msgTip)
+    @Bind(R.id.msgTip)
     TextView msgTip;
     private BaseFragment currentFragment;
     public static final String FRAGMENT_HOME = "home";
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         fragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         getSupportActionBar().hide();
         setClick();
         setFragment(R.id.mHomeIcon);
