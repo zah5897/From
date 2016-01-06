@@ -86,8 +86,15 @@ public class EditUserPage extends BaseActivity {
             String imageUrl = user.getAvatar();
             if (imageUrl != null) {
                 int width = DisplayUtil.dip2px(this, 60);
-                Glide.with(this).load(Urls.URL_IMAGE_FROFIX + imageUrl).override(width, width).into(userImg);
+                Glide.with(this).load(Urls.URL_IMAGE_FROFIX + imageUrl).placeholder(R.mipmap.headlogo).error(R.mipmap.headlogo).override(width, width).into(userImg);
             }
+
+            if (user.getSex() == 0) {
+                manBox.setChecked(true);
+            } else {
+                womanBox.setChecked(true);
+            }
+
         }
     }
 

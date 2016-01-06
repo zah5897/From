@@ -75,7 +75,7 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
 
             if (loginUser.getAvatar() != null) {
                 int width = DisplayUtil.dip2px(getContext(), 60);
-                Glide.with(this).load(Urls.URL_IMAGE_FROFIX + loginUser.getAvatar()).transform(new GlideCircleTransform(getContext())).override(width, width).into(iv_user_head);
+                Glide.with(this).load(Urls.URL_IMAGE_FROFIX + loginUser.getAvatar()).placeholder(R.mipmap.headlogo).error(R.mipmap.headlogo).transform(new GlideCircleTransform(getContext())).override(width, width).into(iv_user_head);
             }
 
             if (!TextUtils.isEmpty(loginUser.getNick_name())) {
