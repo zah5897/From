@@ -160,6 +160,8 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
                 break;
             case R.id.exit_login:
                 //setting
+                UserManager.getInstance().logout();
+                setValue();
                 break;
         }
     }
