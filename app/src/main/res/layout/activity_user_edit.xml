@@ -147,7 +147,7 @@
                     android:layout_width="20.0dip"
                     android:layout_height="20.0dip"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/user_edit_info_flag" />
+                    android:src="@mipmap/headlogo" />
 
                 <TextView
                     android:layout_width="wrap_content"

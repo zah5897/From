@@ -44,10 +44,7 @@ public class HttpUtils {
     }
 
     public static void post(String url, RequestParams params, final DefaultJsonHttpResponseHandler callBackListener) {
-
         if (isNetworkConnected()) {
-
-
             getAsyncHttpClient().post(url, params, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

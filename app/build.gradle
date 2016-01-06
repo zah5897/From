@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.haoqi.from"
-        minSdkVersion 9
+        minSdkVersion 11
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -24,12 +24,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.loopj.android:android-async-http:1.4.9'
-
     compile project(':pull-to-refresh')
-    compile 'com.astuetz:pagerslidingtabstrip:1.0.1' //tab条
-//    compile 'com.github.frank-zhu:pullzoomview:1.0.0'  //主页
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    //tab条
+    //    compile 'com.github.frank-zhu:pullzoomview:1.0.0'  //主页
     compile 'com.google.code.gson:gson:2.2.4'
-
     compile 'com.jakewharton:butterknife:7.0.1'
-
+    compile project(':multi-image-selector')
 }

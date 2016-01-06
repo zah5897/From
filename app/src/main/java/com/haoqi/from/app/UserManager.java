@@ -78,4 +78,38 @@ public class UserManager {
             }
         });
     }
+
+    public void login(String name, String password, final CallBackListener listener) {
+
+        RequestParams params = new RequestParams();
+        params.put("mail", name);
+        params.put("password", password);
+        HttpUtils.post(Urls.URL_LOGIN, params, new DefaultJsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                JSONObject userObj = response.optJSONObject("user");
+                if (userObj != null) {
+                    String userStr = userObj.toString();
+                    User user = User.prase(userStr);
+                    if (user != null) {
+                        setUser(user);
+                        ConfigManager.Instance().put(USER_CFG, userStr);
+                        listener.onSuccess(0, user);
+                    }
+                }
+                listener.onFailure(-1, "系统错误");
+            }
+
+            @Override
+            public void onFailure(int statusCode, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, responseString, throwable);
+                listener.onFailure(statusCode, responseString);
+            }
+        });
+    }
+
+    public void logout() {
+        user = null;
+        ConfigManager.Instance().put(USER_CFG, "");
+    }
 }

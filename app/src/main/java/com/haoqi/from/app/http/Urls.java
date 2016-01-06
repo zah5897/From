@@ -7,6 +7,7 @@ public class Urls {
     public static final String BASE_URL = "http://192.168.1.101:8080/forly";
 
     public static final String URL_REGIST = BASE_URL + "/api/user/regist";
-    public static final String URL_LOGIN = BASE_URL + "/api/user/login";
+    public static final String URL_LOGIN = BASE_URL + "/api/user/login_mail";
+    public static final String URL_MODIFY = BASE_URL + "/api/user/modify";
 
 }
