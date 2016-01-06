@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.haoqi.from.app.HQApplication;
+import com.haoqi.from.app.UserManager;
 import com.haoqi.from.app.listener.CallBackListener;
 import com.haoqi.from.util.ToastUtil;
 import com.loopj.android.http.AsyncHttpClient;
@@ -45,6 +46,10 @@ public class HttpUtils {
 
     public static void post(String url, RequestParams params, final DefaultJsonHttpResponseHandler callBackListener) {
         if (isNetworkConnected()) {
+
+            if (params != null && UserManager.getInstance().getUser() != null) {
+                params.put("userId", UserManager.getInstance().getUser().getId());
+            }
             getAsyncHttpClient().post(url, params, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ecloud.pulltozoomview.PullToZoomScrollViewEx;
 import com.haoqi.from.R;
 import com.haoqi.from.activity.EditUserPage;
@@ -19,8 +20,10 @@ import com.haoqi.from.activity.LoginActivity;
 import com.haoqi.from.activity.RegistActivity;
 import com.haoqi.from.app.ConfigManager;
 import com.haoqi.from.app.UserManager;
+import com.haoqi.from.app.http.Urls;
 import com.haoqi.from.base.BaseFragment;
 import com.haoqi.from.model.User;
+import com.haoqi.from.view.GlideCircleTransform;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -64,9 +67,14 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
         TextView signature = ((TextView) scrollView.getHeaderView().findViewById(R.id.tv_user_signature));
         TextView user_name = ((TextView) scrollView.getHeaderView().findViewById(R.id.tv_user_name));
         LinearLayout extra_layout = ((LinearLayout) scrollView.getHeaderView().findViewById(R.id.extra_layout));
-
+        ImageView iv_user_head = (ImageView) scrollView.getHeaderView().findViewById(R.id.iv_user_head);
         if (loginUser != null) {
             scrollView.getHeaderView().findViewById(R.id.ll_action_button).setVisibility(View.GONE);
+
+
+            if (loginUser.getAvatar() != null) {
+                Glide.with(this).load(Urls.URL_IMAGE_FROFIX + loginUser.getAvatar()).transform(new GlideCircleTransform(getContext())).override(iv_user_head.getWidth(), iv_user_head.getWidth()).into(iv_user_head);
+            }
 
             if (!TextUtils.isEmpty(loginUser.getNick_name())) {
                 user_name.setText(loginUser.getNick_name());
@@ -85,6 +93,7 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
             extra_layout.setVisibility(View.GONE);
             signature.setVisibility(View.GONE);
             user_name.setText("您还没登录");
+            iv_user_head.setImageResource(R.mipmap.headlogo);
         }
     }
 

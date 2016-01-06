@@ -13,19 +13,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.haoqi.from.R;
 import com.haoqi.from.app.UserManager;
-import com.haoqi.from.app.http.DefaultJsonHttpResponseHandler;
-import com.haoqi.from.app.http.HttpUtils;
 import com.haoqi.from.app.http.Urls;
 import com.haoqi.from.app.listener.CallBackListener;
 import com.haoqi.from.base.BaseActivity;
+import com.haoqi.from.model.User;
 import com.haoqi.from.util.FileUtil;
 import com.haoqi.from.util.ProgressDialogUtil;
 import com.haoqi.from.util.ToastUtil;
-import com.loopj.android.http.RequestParams;
-
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,18 +31,27 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cz.msebera.android.httpclient.Header;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
  * Created by youxifuhuaqi on 2015/12/29.
  */
 public class EditUserPage extends BaseActivity {
+
+
+    public static final int REQUEST_IMAGE = 2;
+    public static final int ZOOM_IMAGE = 3;
+    @Bind(R.id.back)
+    ImageView back;
     @Bind(R.id.title)
     TextView title;
     @Bind(R.id.user_img)
     ImageView userImg;
+    @Bind(R.id.user_img_layout)
+    RelativeLayout userImgLayout;
     @Bind(R.id.name_txt)
+    TextView nameTxt;
+    @Bind(R.id.nick_name)
     EditText nickName;
     @Bind(R.id.man_box)
     CheckBox manBox;
@@ -53,9 +59,6 @@ public class EditUserPage extends BaseActivity {
     CheckBox womanBox;
     @Bind(R.id.most_like_text)
     EditText mostLikeText;
-
-    public static final int REQUEST_IMAGE = 2;
-    public static final int ZOOM_IMAGE = 3;
 
 
     private String selectedImagePath;
@@ -65,9 +68,25 @@ public class EditUserPage extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_edit);
         ButterKnife.bind(this);
-
         title.setText("用户编辑");
 
+        User user = UserManager.getInstance().getUser();
+        if (user != null) {
+            String nickNameS = user.getNick_name();
+            if (nickNameS != null) {
+                nickName.setText(nickNameS);
+            }
+
+            String info = user.getInfo();
+
+            if (info != null) {
+                mostLikeText.setText(info);
+            }
+            String imageUrl = user.getAvatar();
+            if (imageUrl != null) {
+                Glide.with(this).load(Urls.URL_IMAGE_FROFIX + imageUrl).override(userImg.getWidth(), userImg.getWidth()).into(userImg);
+            }
+        }
     }
 
 
@@ -151,6 +170,7 @@ public class EditUserPage extends BaseActivity {
                     public void onSuccess(int statusCode, Object... obj) {
                         ProgressDialogUtil.dismiss(progressDialog);
                         ToastUtil.show("修改成功!");
+                        finish();
                     }
 
                     @Override
