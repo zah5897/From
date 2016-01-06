@@ -27,8 +27,8 @@
 
                 <ImageView
                     android:id="@+id/user_img"
-                    android:layout_width="65.0dip"
-                    android:layout_height="65.0dip"
+                    android:layout_width="60.0dip"
+                    android:layout_height="60.0dip"
                     android:layout_centerInParent="true"
                     android:scaleType="centerInside"
                     android:src="@mipmap/icon_camera_night" />

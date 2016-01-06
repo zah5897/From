@@ -20,6 +20,7 @@ import com.haoqi.from.app.http.Urls;
 import com.haoqi.from.app.listener.CallBackListener;
 import com.haoqi.from.base.BaseActivity;
 import com.haoqi.from.model.User;
+import com.haoqi.from.util.DisplayUtil;
 import com.haoqi.from.util.FileUtil;
 import com.haoqi.from.util.ProgressDialogUtil;
 import com.haoqi.from.util.ToastUtil;
@@ -84,7 +85,8 @@ public class EditUserPage extends BaseActivity {
             }
             String imageUrl = user.getAvatar();
             if (imageUrl != null) {
-                Glide.with(this).load(Urls.URL_IMAGE_FROFIX + imageUrl).override(userImg.getWidth(), userImg.getWidth()).into(userImg);
+                int width = DisplayUtil.dip2px(this, 60);
+                Glide.with(this).load(Urls.URL_IMAGE_FROFIX + imageUrl).override(width, width).into(userImg);
             }
         }
     }

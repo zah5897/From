@@ -23,6 +23,7 @@ import com.haoqi.from.app.UserManager;
 import com.haoqi.from.app.http.Urls;
 import com.haoqi.from.base.BaseFragment;
 import com.haoqi.from.model.User;
+import com.haoqi.from.util.DisplayUtil;
 import com.haoqi.from.view.GlideCircleTransform;
 
 import butterknife.Bind;
@@ -73,7 +74,8 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
 
 
             if (loginUser.getAvatar() != null) {
-                Glide.with(this).load(Urls.URL_IMAGE_FROFIX + loginUser.getAvatar()).transform(new GlideCircleTransform(getContext())).override(iv_user_head.getWidth(), iv_user_head.getWidth()).into(iv_user_head);
+                int width = DisplayUtil.dip2px(getContext(), 60);
+                Glide.with(this).load(Urls.URL_IMAGE_FROFIX + loginUser.getAvatar()).transform(new GlideCircleTransform(getContext())).override(width, width).into(iv_user_head);
             }
 
             if (!TextUtils.isEmpty(loginUser.getNick_name())) {
