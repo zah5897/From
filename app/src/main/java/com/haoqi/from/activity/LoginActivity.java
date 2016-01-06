@@ -54,7 +54,8 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.tv_login)
     public void login() {
-
+        String name = etEmail.getText().toString();
+        String password = etPassword.getText().toString();
     }
 
 }
