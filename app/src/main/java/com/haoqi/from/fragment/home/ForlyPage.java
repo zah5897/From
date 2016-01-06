@@ -30,6 +30,7 @@ public class ForlyPage extends BaseRefreshFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initRefreshListView();
         mList.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, new String[]{"1", "2"}));
     }
 

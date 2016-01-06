@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 public class BaseFragment extends Fragment {
     protected boolean hasInit = false;
 
+    protected boolean hasLoad = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return super.onCreateView(inflater, container, savedInstanceState);
@@ -22,6 +24,9 @@ public class BaseFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+    }
+
+    public void onSelected() {
     }
 
     public String getPageTitle() {

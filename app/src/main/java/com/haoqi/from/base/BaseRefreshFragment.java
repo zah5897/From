@@ -22,6 +22,8 @@ public class BaseRefreshFragment extends BaseFragment {
     PullToRefreshListView mPullToRefresh;
     public ListView mList;
 
+    private long cursor = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return super.onCreateView(inflater, container, savedInstanceState);
@@ -30,10 +32,19 @@ public class BaseRefreshFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initRefreshListView();
     }
 
-    private void initRefreshListView() {
+
+    public void setRefreshing() {
+        mPullToRefresh.setRefreshing();
+    }
+
+    public void setRefreshing(boolean refreshing) {
+        mPullToRefresh.setRefreshing(refreshing);
+    }
+
+
+    protected void initRefreshListView() {
         mPullToRefresh.setMode(PullToRefreshBase.Mode.BOTH);
         mList = mPullToRefresh.getRefreshableView();
         mList.setDividerHeight(1);
@@ -50,14 +61,23 @@ public class BaseRefreshFragment extends BaseFragment {
         mPullToRefresh.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> pullToRefreshBase) {
-
+                onRefresh();
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> pullToRefreshBase) {
-
+                onNextPage();
             }
         });
+        this.hasInit = true;
+    }
+
+
+    public void onRefresh() {
+
+    }
+
+    public void onNextPage() {
     }
 
     public static void showListSideDivider(ListView v, boolean top) {

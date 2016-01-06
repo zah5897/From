@@ -25,6 +25,11 @@ public class SecretPage extends BaseRefreshFragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public String getPageTitle() {
         return TAG;
     }

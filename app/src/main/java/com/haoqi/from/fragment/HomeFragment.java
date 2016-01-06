@@ -68,6 +68,22 @@ public class HomeFragment extends BaseFragment {
         tabs.setIndicatorHeight(3);
         tabs.setIndicatorColor(getResources().getColor(R.color.old_red));
         tabs.setViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                fragmentsList.get(position).onSelected();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @OnClick(R.id.right_menu)

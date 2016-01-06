@@ -23,6 +23,12 @@ public class HotPage extends BaseRefreshFragment {
         ButterKnife.bind(this, view);
         return view;
     }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
