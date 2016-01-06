@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -13,11 +14,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.haoqi.from.R;
+import com.haoqi.from.app.UserManager;
 import com.haoqi.from.app.http.DefaultJsonHttpResponseHandler;
 import com.haoqi.from.app.http.HttpUtils;
 import com.haoqi.from.app.http.Urls;
+import com.haoqi.from.app.listener.CallBackListener;
 import com.haoqi.from.base.BaseActivity;
 import com.haoqi.from.util.FileUtil;
+import com.haoqi.from.util.ProgressDialogUtil;
 import com.haoqi.from.util.ToastUtil;
 import com.loopj.android.http.RequestParams;
 
@@ -137,29 +141,26 @@ public class EditUserPage extends BaseActivity {
 
                 int sex = manBox.isChecked() ? 0 : 1;
 
-                RequestParams params = new RequestParams();
-                params.put("nickName", nickNameStr);
-                params.put("info", info);
-                params.put("sex", sex);
-                if (selectedImagePath != null) {
-                    try {
-                        params.put("head_icon", new File(selectedImagePath));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                if (TextUtils.isEmpty(nickNameStr)) {
+                    ToastUtil.show("昵称不能为空！");
+                    return;
                 }
-                HttpUtils.post(Urls.URL_MODIFY, params, new DefaultJsonHttpResponseHandler() {
+                progressDialog = ProgressDialogUtil.show(this, "正在修改信息...");
+                UserManager.getInstance().modifyUser(nickNameStr, info, sex, selectedImagePath, new CallBackListener() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        super.onSuccess(statusCode, headers, response);
+                    public void onSuccess(int statusCode, Object... obj) {
+                        ProgressDialogUtil.dismiss(progressDialog);
+                        ToastUtil.show("修改成功!");
                     }
 
                     @Override
-                    public void onFailure(int statusCode, String responseString, Throwable throwable) {
-                        super.onFailure(statusCode, responseString, throwable);
+                    public void onFailure(int statusCode, String message) {
+                        if (statusCode > 0) {
+                            ToastUtil.show("修改失败，" + message);
+                        }
+                        ProgressDialogUtil.dismiss(progressDialog);
                     }
                 });
-
                 break;
         }
     }

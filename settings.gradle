@@ -1,1 +1,1 @@
-include ':app', ':pull-to-refresh'
+include ':app', ':pull-to-refresh', ':multi-image-selector'

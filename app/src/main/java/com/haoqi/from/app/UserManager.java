@@ -12,6 +12,9 @@ import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -103,6 +106,41 @@ public class UserManager {
             @Override
             public void onFailure(int statusCode, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, responseString, throwable);
+                listener.onFailure(statusCode, responseString);
+            }
+        });
+    }
+
+    public void modifyUser(String nickNameStr, String info, int sex, String selectedImagePath, final CallBackListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("nickName", nickNameStr);
+        params.put("info", info);
+        params.put("sex", sex);
+        if (selectedImagePath != null) {
+            try {
+                params.put("head_icon", new File(selectedImagePath));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        HttpUtils.post(Urls.URL_MODIFY, params, new DefaultJsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                JSONObject userObj = response.optJSONObject("user");
+                if (userObj != null) {
+                    String userStr = userObj.toString();
+                    User user = User.prase(userStr);
+                    if (user != null) {
+                        setUser(user);
+                        ConfigManager.Instance().put(USER_CFG, userStr);
+                        listener.onSuccess(0, user);
+                    }
+                }
+                listener.onFailure(-1, "系统错误");
+            }
+
+            @Override
+            public void onFailure(int statusCode, String responseString, Throwable throwable) {
                 listener.onFailure(statusCode, responseString);
             }
         });
