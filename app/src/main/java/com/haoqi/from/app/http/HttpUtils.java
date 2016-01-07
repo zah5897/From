@@ -26,6 +26,9 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
 public class HttpUtils {
+
+
+    public static final int PAGE_SIZE = 20;
     private static WeakReference<AsyncHttpClient> httpClientRef = new WeakReference<AsyncHttpClient>(
             null);
 

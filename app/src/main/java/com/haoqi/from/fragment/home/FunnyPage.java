@@ -8,9 +8,17 @@ import android.view.ViewGroup;
 
 import com.haoqi.from.FunnyAdapter;
 import com.haoqi.from.R;
+import com.haoqi.from.app.http.DefaultJsonHttpResponseHandler;
+import com.haoqi.from.app.http.HttpUtils;
+import com.haoqi.from.app.http.Urls;
 import com.haoqi.from.base.BaseRefreshFragment;
+import com.haoqi.from.util.ToastUtil;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
 
 import butterknife.ButterKnife;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by youxifuhuaqi on 2015/12/16.
@@ -36,6 +44,44 @@ public class FunnyPage extends BaseRefreshFragment {
         }
     }
 
+
+    private void loadData(final boolean refresh) {
+
+        if (refresh) {
+            cursor = 0;
+        } else {
+            cursor = adapter.getLastId();
+        }
+        RequestParams params = new RequestParams();
+        params.put("lastID", cursor);
+        params.put("pageSize", HttpUtils.PAGE_SIZE);
+
+        HttpUtils.post(Urls.URL_FUNNY, params, new DefaultJsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                int code = response.optInt("errorCode");
+                if (code == 0) {
+
+                } else {
+                    String errorMsg = response.optString("errorMsg");
+                    ToastUtil.show(errorMsg);
+                }
+                onRefreshComplete();
+            }
+
+            @Override
+            public void onFailure(int statusCode, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, responseString, throwable);
+                if (statusCode > 0) {
+                    ToastUtil.show(responseString);
+                }
+                onRefreshComplete();
+            }
+        });
+
+    }
+
     @Override
     public void onSelected() {
         if (!hasLoad) {
@@ -50,13 +96,14 @@ public class FunnyPage extends BaseRefreshFragment {
 
     @Override
     public void onRefresh() {
-        super.onRefresh();
+        loadData(true);
     }
 
     @Override
     public void onNextPage() {
-        super.onNextPage();
+        loadData(false);
     }
+
 
     @Override
     public String getPageTitle() {

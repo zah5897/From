@@ -22,7 +22,7 @@ public class BaseRefreshFragment extends BaseFragment {
     PullToRefreshListView mPullToRefresh;
     public ListView mList;
 
-    private long cursor = 0;
+    protected long cursor = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +37,10 @@ public class BaseRefreshFragment extends BaseFragment {
 
     public void setRefreshing() {
         mPullToRefresh.setRefreshing();
+    }
+
+    public  void onRefreshComplete(){
+        mPullToRefresh.onRefreshComplete();
     }
 
     public void setRefreshing(boolean refreshing) {

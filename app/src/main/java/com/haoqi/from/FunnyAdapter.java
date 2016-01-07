@@ -28,14 +28,23 @@ public class FunnyAdapter extends BaseAdapter {
         return funnies.size();
     }
 
+    public long getLastId() {
+        if (funnies.size() > 0) {
+            return getItemId(getCount() - 1);
+        } else {
+            return 0;
+        }
+
+    }
+
     @Override
-    public Object getItem(int position) {
+    public Funny getItem(int position) {
         return funnies.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return getItem(position).getId();
     }
 
     @Override
