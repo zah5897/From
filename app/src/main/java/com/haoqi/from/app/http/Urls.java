@@ -6,7 +6,7 @@ package com.haoqi.from.app.http;
 public class Urls {
 
 
-    public static final String BASE_URL = "http://192.168.1.101:8080/forly";
+    public static final String BASE_URL = "http://192.168.0.104:8080/forly";
     public static final String URL_IMAGE_FROFIX = BASE_URL + "/images/";
 
     public static final String URL_REGIST = BASE_URL + "/api/user/regist";

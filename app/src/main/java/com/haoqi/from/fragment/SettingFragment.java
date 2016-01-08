@@ -40,6 +40,7 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
     @Bind(R.id.title)
     TextView title;
 
+    private  boolean hasInit;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);

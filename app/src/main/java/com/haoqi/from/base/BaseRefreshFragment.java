@@ -73,7 +73,6 @@ public class BaseRefreshFragment extends BaseFragment {
                 onNextPage();
             }
         });
-        this.hasInit = true;
     }
 
 

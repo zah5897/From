@@ -90,7 +90,7 @@ public class HttpUtils {
     }
 
 
-    public static List<?> arrayToModel(JSONArray array, Class clazz) {
+    public static List<?> arrayToModel(JSONArray array, Class<?> clazz) {
         int len = array.length();
         List<Object> list = new ArrayList<>();
         Gson g = new Gson();

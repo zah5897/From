@@ -6,16 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.haoqi.from.FunnyAdapter;
+import com.haoqi.from.adapter.FunnyAdapter;
 import com.haoqi.from.R;
 import com.haoqi.from.app.http.DefaultJsonHttpResponseHandler;
 import com.haoqi.from.app.http.HttpUtils;
 import com.haoqi.from.app.http.Urls;
 import com.haoqi.from.base.BaseRefreshFragment;
+import com.haoqi.from.model.Funny;
 import com.haoqi.from.util.ToastUtil;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
@@ -37,11 +41,11 @@ public class FunnyPage extends BaseRefreshFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (!hasInit) {
-            initRefreshListView();
+        initRefreshListView();
+        if (adapter == null) {
             adapter = new FunnyAdapter(FunnyPage.this);
-            mList.setAdapter(adapter);
         }
+        mList.setAdapter(adapter);
     }
 
 
@@ -62,7 +66,15 @@ public class FunnyPage extends BaseRefreshFragment {
                 super.onSuccess(statusCode, headers, response);
                 int code = response.optInt("errorCode");
                 if (code == 0) {
-
+                    JSONArray rows = response.optJSONArray("rows");
+                    List<Funny> datas = (List<Funny>) HttpUtils.arrayToModel(rows, Funny.class);
+                    if (datas != null) {
+                        if (refresh) {
+                            adapter.clearAndAdd(datas);
+                        } else {
+                            adapter.addData(datas);
+                        }
+                    }
                 } else {
                     String errorMsg = response.optString("errorMsg");
                     ToastUtil.show(errorMsg);
@@ -84,11 +96,16 @@ public class FunnyPage extends BaseRefreshFragment {
 
     @Override
     public void onSelected() {
+        if (adapter == null || adapter.getCount() == 0) {
+            hasLoad = false;
+        }
+
         if (!hasLoad) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     setRefreshing();
+                    hasLoad = true;
                 }
             }, 1000);
         }

@@ -11,8 +11,6 @@ import android.view.ViewGroup;
  * Created by youxifuhuaqi on 2015/12/14.
  */
 public class BaseFragment extends Fragment {
-    protected boolean hasInit = false;
-
     protected boolean hasLoad = false;
 
     @Override
