@@ -58,7 +58,9 @@ public class FunnyPage extends BaseRefreshFragment {
         }
         RequestParams params = new RequestParams();
         params.put("lastID", cursor);
+
         params.put("pageSize", HttpUtils.PAGE_SIZE);
+
 
         HttpUtils.post(Urls.URL_FUNNY, params, new DefaultJsonHttpResponseHandler() {
             @Override
